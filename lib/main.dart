@@ -5,6 +5,8 @@ import '../screens/homepage.dart';
 import 'screens/first_time_login.dart';
 import 'provider/theme_provider.dart';
 import '../services/wifi_p2p_manager.dart';
+import 'screens/splashscreen.dart';
+import 'screens/homepage.dart';
 
 
 void main() async {
@@ -49,10 +51,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(), // Optionally define a dark theme
       themeMode: themeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light, // Apply theme globally
-      home: isFirstTime
-          ? const FirstTimeLoginPage()
-          //: const MyHomePage(title: 'ConnectX'),
-          : HomePage(),
+      home: SplashScreen(isFirstTime: isFirstTime), // Set the splash screen as the first screen,
     );
   }
 }
