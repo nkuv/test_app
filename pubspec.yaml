@@ -21,11 +21,9 @@ dependencies:
   filesystem_picker: ^4.1.0
   dio: ^5.0.0
   mime_type: ^1.0.0
-<<<<<<< HEAD
-=======
   permission_handler: ^10.2.0
   flutter_webrtc: ^0.12.12+hotfix.1
->>>>>>> 6b54eb17e7a4d13d26dd35833b3e233e607866b0
+
 
 
 dev_dependencies:
