@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io'; // To get system default name
 import '../provider/theme_provider.dart';
+import '../services/log_manager.dart';
+import 'log_viewer.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -148,6 +150,49 @@ class SettingsPageState extends State<SettingsPage> {
                     ),
                   ],
                 ),
+              ),
+            ),
+
+            const SizedBox(height: 12),
+            const Divider(),
+
+            const Text(
+              "Performance Logs",
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 5),
+
+            Card(
+              elevation: 3,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              child: ListTile(
+                leading: Icon(Icons.analytics, color: Colors.teal.shade400),
+                title: Text('View Logs', style: TextStyle(fontSize: 14)),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LogViewerScreen()),
+                  );
+                },
+              ),
+            ),
+
+            Card(
+              elevation: 3,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              child: ListTile(
+                leading: const Icon(Icons.delete_forever, color: Colors.redAccent),
+                title: const Text('Clear Logs', style: TextStyle(fontSize: 14)),
+                trailing: const Icon(Icons.clear, size: 20),
+                onTap: () async {
+                  await LogManager.instance.clearLogs();
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Logs cleared successfully')),
+                    );
+                  }
+                },
               ),
             ),
 
